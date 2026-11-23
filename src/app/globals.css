@@ -1,0 +1,1874 @@
+@import "tailwindcss";
+
+/* =================================
+   NILVAMOON — DESIGN SYSTEM
+================================= */
+
+/* Brand Colors — refined luxury mystical palette */
+:root {
+  --background: #f6eff2;
+  --foreground: #231c2e;   /* ≈ 15:1 */
+  --surface: #fbf7f8;
+  --muted: #5f5870;        /* ≈ 6:1 */
+  --border: rgba(35, 28, 46, 0.12);
+
+  --plum: #7d3a60;         /* رنگ اصلی/لینک ≈ 7:1 */
+  --gold: #c9a05a;         /* فقط تزئینی */
+  --gold-text: #7a5714;    /* طلاییِ متنی روی روشن ≈ 5.7:1 */
+  --rose: #d49ab0;
+  --lavender: #9f93c4;
+  --violet: #2c2438;
+
+  --glass-bg: rgba(250, 244, 246, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-shadow: 0 12px 40px rgba(44, 36, 56, 0.1);
+}
+
+.dark {
+  --background: #1a1426;
+  --foreground: #f6eff4;
+  --surface: #2a2238;
+  --muted: #bdb1c8;
+  --border: rgba(232, 215, 236, 0.14);
+  --plum: #e5a8c2;
+  --gold-text: #f0c46c;
+  --glass-bg: rgba(52, 43, 66, 0.48);
+  --glass-border: rgba(255, 255, 255, 0.22);
+  --glass-shadow: 0 12px 45px rgba(0, 0, 0, 0.25);
+}
+/* Tailwind Theme */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+/* Base */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* LIGHT THEME */
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      ellipse at 14% 8%,
+      rgba(143, 74, 110, 0.22),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 88% 18%,
+      rgba(159, 147, 196, 0.24),
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse at 52% 96%,
+      rgba(201, 160, 90, 0.18),
+      transparent 48%
+    ),
+    linear-gradient(180deg, #f7f0f3 0%, #f0e6eb 50%, #f4ebe3 100%);
+
+  color: var(--foreground);
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+/* DARK THEME */
+.dark body {
+  background:
+    radial-gradient(
+      ellipse at 15% 10%,
+      rgba(152, 84, 119, 0.38),
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse at 88% 18%,
+      rgba(112, 82, 166, 0.34),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 50% 98%,
+      rgba(198, 154, 85, 0.18),
+      transparent 48%
+    ),
+    linear-gradient(180deg, #1d162b 0%, #241b35 55%, #191324 100%);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: var(--rose);
+  color: var(--violet);
+}
+
+/* =================================
+   NILVAMOON — GLASS HEADER
+================================= */
+
+.site-header {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  width: min(1160px, calc(100% - 36px));
+  margin: 16px auto 0;
+  direction: ltr;
+}
+
+/* LIQUID GLASS HEADER */
+
+/* =================================
+   NILVAMOON — FROSTED LIQUID GLASS
+================================= */
+
+.header-glass {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  padding: 0 18px;
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(16px) saturate(190%) brightness(1.06);
+  -webkit-backdrop-filter: blur(16px) saturate(190%) brightness(1.06);
+  box-shadow:
+    0 12px 36px rgba(35, 28, 46, 0.14),
+    0 1px 2px rgba(35, 28, 46, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 0 22px 4px rgba(255, 255, 255, 0.14);
+}
+
+/* Soft light reflection — liquid glass specular */
+.header-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 32%,
+                    rgba(255,255,255,0) 68%, rgba(255,255,255,.25) 100%),
+    radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.45), transparent 60%);
+}
+.header-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.08) 30%,
+                              rgba(255,255,255,.05) 70%, rgba(255,255,255,.75));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+/* Keep controls above the glass reflection.
+   Exclude floating panels to preserve their positioning. */
+.header-glass > :not(.brand):not(.header-dropdown):not(.header-search-panel) {
+  position: relative;
+  z-index: 1;
+}
+
+.header-glass > .brand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.header-side {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-left,
+.header-right {
+  direction: ltr;
+  min-width: 100px;
+}
+
+.header-right {
+  justify-content: flex-end;
+}
+
+.header-icon-button {
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+}
+
+.header-icon-button svg,
+.header-search-panel svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.header-icon-button:hover,
+.header-icon-button.active {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(155, 84, 124, 0.28);
+  box-shadow: 0 5px 18px rgba(155, 84, 124, 0.14);
+}
+
+.brand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--violet);
+  text-decoration: none;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.brand-symbol {
+  position: absolute;
+  top: -9px;
+  left: -20px;
+  color: var(--plum);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.brand-name {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  line-height: 1.1;
+}
+
+.brand-caption {
+  margin-top: 4px;
+  color: var(--muted);
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 2.1px;
+}
+
+
+
+.header-dropdown {
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 230px;
+  padding: 12px;
+  direction: rtl;
+}
+
+.header-dropdown a {
+  padding: 12px 14px;
+  border-radius: 13px;
+  color: var(--foreground);
+  font-size: 14px;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.header-dropdown a:hover {
+  color: var(--plum);
+  background: rgba(231, 168, 184, 0.18);
+}
+
+.header-glass > form.header-search-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  left: auto;
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: min(360px, calc(100vw - 36px));
+  min-height: 58px;
+  margin: 0;
+  padding: 14px 17px;
+
+  box-sizing: border-box;
+  direction: rtl;
+  color: var(--muted);
+
+  border: 1px solid rgba(122, 18, 56, 0.16);
+  border-radius: 22px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 249, 240, 0.985),
+    rgba(245, 232, 239, 0.98) 55%,
+    rgba(233, 222, 241, 0.985)
+  );
+
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  backdrop-filter: blur(24px) saturate(145%);
+  box-shadow: 0 16px 42px rgba(26, 11, 61, 0.16);
+}
+
+.dark .header-glass > form.header-search-panel {
+  border-color: rgba(231, 218, 245, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 11, 61, 0.985),
+    rgba(42, 21, 99, 0.98) 55%,
+    rgba(70, 24, 76, 0.985)
+  );
+}
+
+.header-search-panel input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: var(--foreground);
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+}
+
+.header-search-panel input::placeholder {
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+/* Dark theme — liquid glass */
+.dark .header-glass {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: linear-gradient(
+    145deg,
+    rgba(68, 48, 95, 0.55) 0%,
+    rgba(42, 28, 68, 0.48) 50%,
+    rgba(90, 40, 85, 0.4) 100%
+  );
+  backdrop-filter: blur(44px) saturate(170%) brightness(1.08);
+  -webkit-backdrop-filter: blur(44px) saturate(170%) brightness(1.08);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.32),
+    0 2px 10px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 24px rgba(255, 200, 230, 0.04);
+}
+
+.dark .header-icon-button {
+  color: var(--foreground);
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.1);
+}
+.dark .header-icon-button:hover,
+.dark .header-icon-button.active {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.dark .brand {
+  color: var(--foreground);
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    top: 10px;
+    width: calc(100% - 24px);
+    margin-top: 10px;
+  }
+
+  .header-glass {
+    min-height: 66px;
+    padding: 0 12px;
+    border-radius: 22px;
+  }
+
+  .header-left,
+  .header-right {
+    min-width: 76px;
+    gap: 7px;
+  }
+
+  .header-icon-button {
+    width: 38px;
+    height: 38px;
+    border-radius: 13px;
+  }
+
+  .brand-name {
+    font-size: 21px;
+  }
+
+  .brand-caption {
+    font-size: 7px;
+    letter-spacing: 1.7px;
+  }
+
+  .brand-symbol {
+    top: -7px;
+    left: -16px;
+    font-size: 17px;
+  }
+
+  .header-dropdown {
+    width: min(230px, calc(100vw - 24px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-icon-button,
+  .header-dropdown a {
+    transition: none;
+  }
+}
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* =================================
+   NILVAMOON — HERO SECTION
+================================= */
+
+/* =========================================
+   HERO — CELESTIAL LUXURY
+========================================= */
+
+.hero-section {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: min(780px, calc(100svh - 110px));
+  padding: 65px 7% 90px;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 55px;
+  width: min(1160px, 100%);
+  margin: 0 auto;
+}
+
+/* Hero copy */
+
+.hero-copy {
+  direction: rtl;
+  text-align: center;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.hero-welcome {
+  margin: 24px auto 12px;
+  color: #8b2a78;
+  font-family: var(--font-iransans), sans-serif;
+  font-size: clamp(19px, 2vw, 23px);
+  font-weight: 800;
+  line-height: 1.85;
+  text-align: center;
+}
+
+.dark .hero-welcome {
+  color: #f6d084;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+  padding: 9px 15px;
+  color: #d69e2e;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(214, 158, 46, 0.28);
+  border-radius: 30px;
+  background: rgba(122, 18, 56, 0.055);
+}
+
+.hero-copy h1 {
+  margin: 0;
+  color: var(--foreground);
+  font-size: clamp(38px, 5vw, 65px);
+  font-weight: 800;
+  line-height: 1.65;
+  letter-spacing: -1.5px;
+}
+
+.hero-copy h1 span {
+  color: #8b2a78;
+  text-shadow: 0 5px 30px rgba(139, 42, 120, 0.2);
+}
+
+.hero-description {
+  max-width: 460px;
+  margin: 0 auto 28px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 2.15;
+  text-align: center;
+}
+.hero-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+  color: var(--foreground);
+  opacity: 0.78;
+  font-family: var(--font-iransans), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.hero-button:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.04);
+  border-color: rgba(255, 238, 190, 0.95);
+  box-shadow:
+    0 16px 36px rgba(152, 84, 119, 0.35),
+    0 6px 18px rgba(198, 154, 85, 0.28),
+    inset 0 1px 2px rgba(255, 255, 255, 0.45);
+}
+
+.hero-button span {
+  font-size: 20px;
+  color: #c9a05a;
+  transition: transform 0.3s ease;
+}
+
+.hero-button:hover span {
+  transform: translateX(-5px);
+}
+/* ========== حالت شب ========== */
+.dark .hero-button {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(180, 140, 200, 0.1) 100%
+  );
+  color: #f8f0f5;
+  box-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.dark .hero-button::before {
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    transparent 40%,
+    transparent 70%,
+    rgba(240, 180, 220, 0.12) 100%
+  );
+}
+
+.dark .hero-button:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(200, 150, 220, 0.15) 100%
+  );
+}
+
+.dark .hero-button span {
+  color: #f0c46c;
+}
+.hero-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hero-note > span {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #d69e2e;
+  box-shadow: 0 0 13px rgba(214, 158, 46, 0.75);
+}
+
+/* Tarot visual */
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+  direction: ltr;
+}
+
+.tarot-card {
+  position: absolute;
+  width: clamp(170px, 19vw, 230px);
+  aspect-ratio: 2 / 3;
+  padding: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(240, 196, 108, 0.65);
+  border-radius: 16px;
+  color: #f0c46c;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      rgba(139, 42, 120, 0.42),
+      transparent 65%
+    ),
+    radial-gradient(
+      circle at 80% 90%,
+      rgba(122, 18, 56, 0.45),
+      transparent 55%
+    ),
+    linear-gradient(145deg, #42143e 0%, #24103f 52%, #160b2d 100%);
+
+  box-shadow:
+    0 28px 65px rgba(20, 7, 35, 0.32),
+    0 0 25px rgba(139, 42, 120, 0.13),
+    inset 0 0 0 3px rgba(240, 196, 108, 0.08),
+    inset 0 1px 12px rgba(255, 255, 255, 0.12);
+
+  transition:
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.tarot-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09),
+    transparent 35%,
+    transparent 70%,
+    rgba(240, 196, 108, 0.07)
+  );
+}
+
+.tarot-artwork {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #f0c46c;
+  filter: drop-shadow(0 0 5px rgba(240, 196, 108, 0.12));
+}
+
+/* Individual cards */
+
+.card-moon {
+  z-index: 1;
+  transform: translate(-145px, 22px) rotate(-13deg) scale(0.88);
+}
+
+.card-sun {
+  z-index: 3;
+  transform: translateY(-8px) rotate(2deg);
+}
+
+.card-star {
+  z-index: 2;
+  transform: translate(145px, 22px) rotate(13deg) scale(0.88);
+}
+
+/* Orbits */
+
+.hero-orbit {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border: 1px solid rgba(139, 42, 120, 0.22);
+  border-radius: 50%;
+  box-shadow:
+    0 0 35px rgba(139, 42, 120, 0.035),
+    inset 0 0 35px rgba(139, 42, 120, 0.025);
+  pointer-events: none;
+}
+
+.orbit-two {
+  width: 550px;
+  height: 550px;
+  border-color: rgba(214, 158, 46, 0.17);
+}
+
+/* Sparkles */
+
+.hero-spark {
+  position: absolute;
+  z-index: 4;
+  color: #f0c46c;
+  text-shadow:
+    0 0 10px rgba(240, 196, 108, 0.65),
+    0 0 25px rgba(214, 158, 46, 0.35);
+  pointer-events: none;
+  animation: sparkle-float 4s ease-in-out infinite;
+}
+
+.spark-one {
+  top: 15%;
+  left: 20%;
+  font-size: 27px;
+}
+
+.spark-two {
+  right: 13%;
+  top: 25%;
+  color: #f8719d;
+  font-size: 35px;
+  animation-delay: 1s;
+}
+
+.spark-three {
+  bottom: 18%;
+  left: 25%;
+  font-size: 20px;
+  animation-delay: 2s;
+}
+
+@keyframes sparkle-float {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-9px) scale(1.12);
+  }
+}
+
+/* Visual caption */
+
+.hero-visual-caption {
+  position: absolute;
+  bottom: 0;
+  z-index: 5;                        /* بالاتر از کارت‌ها */
+  direction: rtl;
+  unicode-bidi: isolate;
+  writing-mode: horizontal-tb;
+  transform: none;
+  rotate: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--foreground);
+  font-family: inherit;              /* فیکس شمارهٔ ۲ */
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.hero-visual-caption span:last-child {
+  color: #d69e2e;
+  font-size: 16px;
+}
+
+/* Background glows */
+
+.hero-glow {
+  position: absolute;
+  z-index: -1;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.hero-glow-one {
+  top: 8%;
+  left: 15%;
+  background: rgba(122, 18, 56, 0.19);
+}
+
+.hero-glow-two {
+  right: 10%;
+  bottom: 5%;
+  background: rgba(42, 21, 99, 0.17);
+}
+
+/* Scroll indicator */
+
+.hero-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.18) 100%
+  );
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  color: #2a1f35;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow:
+    0 10px 30px rgba(40, 20, 60, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.hero-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    transparent 40%,
+    transparent 70%,
+    rgba(255, 220, 180, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.38) 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+  box-shadow:
+    0 16px 40px rgba(40, 20, 60, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(#d69e2e, transparent);
+}
+
+/* Dark theme */
+
+.dark .hero-copy h1 span {
+  color: #f0c46c;
+  text-shadow: 0 5px 30px rgba(240, 196, 108, 0.18);
+}
+
+.dark .hero-eyebrow {
+  color: #f0c46c;
+  background: rgba(122, 18, 56, 0.2);
+  border-color: rgba(240, 196, 108, 0.22);
+}
+
+.dark .hero-orbit {
+  border-color: rgba(216, 145, 180, 0.18);
+}
+
+.dark .orbit-two {
+  border-color: rgba(240, 196, 108, 0.17);
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+  .hero-section {
+    min-height: auto;
+    padding: 65px 24px 85px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .hero-copy {
+    order: 1;
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-note {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    order: 2;
+    min-height: 440px;
+  }
+
+  .card-moon {
+    transform: translate(-95px, 12px) rotate(-7deg) scale(0.84);
+  }
+
+  .card-star {
+    transform: translate(95px, 12px) rotate(7deg) scale(0.84);
+  }
+
+  .hero-orbit {
+    width: 360px;
+    height: 360px;
+  }
+
+  .orbit-two {
+    width: 430px;
+    height: 430px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 48px 18px 75px;
+  }
+
+  .hero-copy h1 {
+    font-size: 37px;
+  }
+
+  .hero-description {
+    font-size: 13px;
+  }
+
+  .hero-visual {
+    min-height: 360px;
+  }
+
+  .tarot-card {
+    width: 145px;
+  }
+
+  .card-moon {
+    transform: translate(-68px, 10px) rotate(-5deg) scale(0.86);
+  }
+
+  .card-star {
+    transform: translate(68px, 10px) rotate(5deg) scale(0.86);
+  }
+
+  .hero-orbit {
+    width: 290px;
+    height: 290px;
+  }
+
+  .orbit-two {
+    width: 350px;
+    height: 350px;
+  }
+
+  .hero-visual-caption {
+    bottom: 2px;
+    font-size: 11px;
+  }
+
+  .hero-bottom {
+    font-size: 10px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-button,
+  .hero-button span,
+  .hero-spark {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* هدر شیشه‌ای نیلوا‌مون — نسخه مات و صیقلی */
+
+/* =================================
+   NILVAMOON — EXPERIENCES SECTION
+================================= */
+
+.experiences-section {
+  position: relative;
+  isolation: isolate;
+  padding: 110px 7% 125px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 12% 48%,
+      rgba(231, 168, 184, 0.17),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 88% 38%,
+      rgba(168, 160, 216, 0.2),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(217, 169, 95, 0.1),
+      transparent 45%
+    );
+  transition: background 0.4s ease;
+}
+
+.experiences-heading {
+  max-width: 650px;
+  margin: 0 auto 55px;
+  text-align: center;
+  direction: rtl;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  color: #985477;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.experiences-heading h2 {
+  margin: 15px 0;
+  color: var(--foreground);
+  font-size: clamp(30px, 4vw, 45px);
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.experiences-heading h2 span {
+  color: #985477;
+}
+
+.experiences-heading p {
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 2.1;
+}
+
+.experiences-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: min(1160px, 100%);
+  margin: 0 auto;
+  direction: rtl;
+}
+
+/* Base card */
+
+.experience-card {
+  position: relative;      /* ← باگ A */
+  overflow: hidden;        /* ← مدار از کارت بیرون نزند */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  padding: 32px 28px 30px;
+  border-radius: 28px;
+  box-shadow:
+    0 20px 50px rgba(55, 35, 65, 0.1),
+    0 4px 16px rgba(55, 35, 65, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 32px 64px rgba(55, 35, 65, 0.16),
+    0 8px 24px rgba(55, 35, 65, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Light theme — individual card colors */
+
+.experience-fortune {
+  background:
+    radial-gradient(
+      circle at 82% 15%,
+      rgba(217, 169, 95, 0.28),
+      transparent 42%
+    ),
+    linear-gradient(145deg, #fff8ed, #f3dce3 100%);
+}
+
+.experience-coffee {
+  background:
+    radial-gradient(
+      circle at 82% 15%,
+      rgba(203, 143, 111, 0.25),
+      transparent 42%
+    ),
+    linear-gradient(145deg, #fff2e8, #ead5ca 100%);
+}
+
+.experience-tarot {
+  background:
+    radial-gradient(
+      circle at 82% 15%,
+      rgba(168, 160, 216, 0.32),
+      transparent 42%
+    ),
+    linear-gradient(145deg, #f4efff, #dfd8f1 100%);
+}
+
+/* Top row */
+
+.experience-card-top,
+.experience-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.experience-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.experience-category {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 14px;
+  border: 1px solid rgba(111, 73, 112, 0.15);
+  border-radius: 30px;
+  color: #69435f;
+  background: rgba(255, 255, 255, 0.48);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.experience-symbol {
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  color: var(--plum);
+  border: 1px solid rgba(111, 73, 112, 0.15);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.experience-card:hover .experience-symbol {
+  transform: scale(1.06);
+}
+/* Card text */
+
+.experience-card-content h3 {
+  margin: 0 0 13px;
+  color: #392a43;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+.experience-card-content p {
+  min-height: 65px;
+  margin: 0 0 23px;
+  color: #665b6c;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 2.1;
+}
+
+.experience-card-content a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #914c75;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.experience-card-content a:hover {
+  color: #5b365f;
+}
+
+.experience-card-content a span {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.experience-card-content a:hover span {
+  transform: translateX(-5px);
+}
+
+/* Decorative orbit */
+
+.experience-card-orbit {
+  position: absolute;
+  z-index: 1;
+  top: 75px;
+  left: -75px;
+  width: 205px;
+  height: 205px;
+  border: 1px solid rgba(111, 73, 112, 0.13);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 20px rgba(255, 255, 255, 0.13),
+    0 0 0 42px rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+}
+
+/* =================================
+   DARK THEME — EXPERIENCES
+================================= */
+
+.dark .experiences-section {
+  background:
+    radial-gradient(
+      ellipse at 12% 45%,
+      rgba(155, 84, 124, 0.2),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 88% 35%,
+      rgba(112, 82, 166, 0.2),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(217, 169, 95, 0.09),
+      transparent 45%
+    );
+}
+
+.dark .section-eyebrow {
+  color: #e5a8c2;
+}
+
+.dark .experiences-heading h2 span {
+  color: #e5a8c2;
+}
+
+/* Dark card surfaces */
+
+.dark .experience-card {
+  color: #f8edf5;
+  border-color: rgba(235, 216, 244, 0.2);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.13);
+}
+
+.dark .experience-card:hover {
+  box-shadow:
+    0 28px 55px rgba(0, 0, 0, 0.32),
+    0 0 30px rgba(177, 111, 174, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.dark .experience-fortune {
+  background:
+    radial-gradient(
+      circle at 82% 15%,
+      rgba(217, 169, 95, 0.24),
+      transparent 43%
+    ),
+    linear-gradient(145deg, #59394f, #2c223d 85%);
+}
+
+.dark .experience-coffee {
+  background:
+    radial-gradient(
+      circle at 82% 15%,
+      rgba(206, 145, 112, 0.25),
+      transparent 43%
+    ),
+    linear-gradient(145deg, #65433f, #302536 85%);
+}
+
+.dark .experience-tarot {
+  background:
+    radial-gradient(
+      circle at 82% 15%,
+      rgba(168, 160, 216, 0.3),
+      transparent 43%
+    ),
+    linear-gradient(145deg, #49416f, #252039 85%);
+}
+
+.dark .experience-category {
+  color: #f6dce9;
+  border-color: rgba(255, 255, 255, 0.19);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark .experience-symbol {
+  color: #f0c9dc;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.dark .experience-card-content h3 {
+  color: #fff4fa;
+}
+
+.dark .experience-card-content p {
+  color: rgba(248, 237, 245, 0.76);
+}
+
+.dark .experience-card-content a {
+  color: #f0c28a;
+}
+
+.dark .experience-card-content a:hover {
+  color: #ffe0b5;
+}
+
+.dark .experience-card-orbit {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 0 0 20px rgba(255, 255, 255, 0.025),
+    0 0 0 42px rgba(255, 255, 255, 0.018);
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+  .experiences-section {
+    padding: 85px 24px 100px;
+  }
+
+  .experiences-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .experience-card {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .experiences-section {
+    padding: 70px 18px 85px;
+  }
+
+  .experiences-heading {
+    margin-bottom: 38px;
+  }
+
+  .experience-card {
+    min-height: 290px;
+    padding: 23px;
+  }
+
+  .experience-card-content h3 {
+    font-size: 22px;
+  }
+
+  .experience-card-content p {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-card,
+  .experience-card-content a,
+  .experience-card-content a span {
+    transition: none;
+  }
+}
+
+/* =========================================
+   HEADER DROPDOWN — DARK MODE
+========================================= */
+
+.dark .header-dropdown,
+.dark .header--panel {
+  color: #fff9f0;
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(139, 42, 120, 0.24),
+      transparent 55%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(42, 21, 99, 0.98),
+      rgba(26, 11, 61, 0.99) 65%,
+      rgba(65, 16, 56, 0.98)
+    );
+
+  border: 1px solid rgba(240, 196, 108, 0.24);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.38),
+    0 0 25px rgba(139, 42, 120, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(160%);
+}
+
+.dark .header-dropdown a,
+.dark .header--panel a {
+  display: block;
+  color: #fff9f0;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    padding 0.25s ease;
+}
+
+.dark .header-dropdown a:hover,
+.dark .header--panel a:hover {
+  color: #f0c46c;
+  background: rgba(139, 42, 120, 0.2);
+}
+
+.dark .header-dropdown a:focus-visible,
+.dark .header--panel a:focus-visible {
+  outline: 2px solid #f0c46c;
+  outline-offset: 3px;
+}
+/* ===== NILVAMOON PATCH START ===== */
+
+/* ---------- ۱) هدر لیکویید گلس (روشن) ---------- */
+.header-glass {
+  border: 0;
+  border-radius: 32px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.52) 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0.42) 100%
+  );
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow:
+    0 12px 36px rgba(35, 28, 46, 0.14),
+    0 1px 2px rgba(35, 28, 46, 0.08),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.3),
+    inset 0 0 22px rgba(255, 255, 255, 0.18);
+}
+
+/* لبهٔ درخشان گرادیانی دور شیشه */
+.header-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0.06) 70%,
+    rgba(255, 255, 255, 0.75)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* ---------- هدر لیکویید گلس (تاریک) ---------- */
+.dark .header-glass {
+  border: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(80, 58, 112, 0.55) 0%,
+    rgba(44, 30, 72, 0.4) 50%,
+    rgba(70, 36, 80, 0.45) 100%
+  );
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.05),
+    inset 0 0 22px rgba(255, 200, 230, 0.05);
+}
+.dark .header-glass::after {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.05) 30%,
+    rgba(255, 255, 255, 0.04) 70%,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+/* دکمه‌های گرد هدر */
+.header-icon-button {
+  border-radius: 50%;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- ۲) رفع باگ مدارهای تزئینی کارت‌های «فال‌ها» ---------- */
+.experience-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.experience-symbol {
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  color: var(--plum);
+  border: 1px solid rgba(111, 73, 112, 0.15);
+  background: rgba(255, 255, 255, 0.5);
+}
+.dark .experience-symbol {
+  color: #f0c9dc;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- ۳) کپشن «هنر کشف خویشتن» + متن افقی روی موبایل ---------- */
+.hero-visual-caption {
+  z-index: 5;
+  writing-mode: horizontal-tb;
+  transform: none;
+  rotate: none;
+  unicode-bidi: isolate;
+  font-family: var(--font-iransans), Tahoma, sans-serif;
+  font-weight: 500;
+}
+.tarot-artwork text {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+@media (max-width: 480px) {
+  .hero-visual-caption {
+    font-size: 11px;
+  }
+}
+
+/* ---------- ۴) سلسلهٔ وزن فونت (فقط ۴۰۰ و ۵۰۰ و ۷۰۰) ---------- */
+.hero-copy h1 {
+  font-weight: 700;
+  letter-spacing: 0; /* حروف فارسی چسبیده‌اند، فاصلهٔ منفی بد است */
+}
+.hero-copy h1 span {
+  font-weight: 700;
+}
+.hero-welcome {
+  font-weight: 700;
+}
+.hero-eyebrow {
+  font-weight: 500;
+}
+.hero-description,
+.experiences-heading p,
+.experience-card-content p {
+  font-weight: 400;
+}
+.hero-button {
+  font-weight: 700;
+}
+.section-eyebrow {
+  font-weight: 500;
+}
+.experiences-heading h2 {
+  font-weight: 700;
+}
+.experience-category {
+  font-weight: 500;
+}
+.experience-card-content h3 {
+  font-weight: 700;
+}
+.experience-card-content a {
+  font-weight: 700;
+}
+.header-dropdown a {
+  font-weight: 500;
+}
+
+/* ---------- ۵) رنگ‌ها با کنتراست بهتر ---------- */
+:root {
+  --muted: #5f5870;
+  --plum: #7d3a60;
+  --gold-text: #7a5714;
+}
+.dark {
+  --plum: #e5a8c2;
+  --gold-text: #f0c46c;
+}
+.hero-eyebrow {
+  color: var(--gold-text);
+}
+.hero-welcome,
+.hero-copy h1 span,
+.section-eyebrow,
+.experiences-heading h2 span {
+  color: var(--plum);
+}
+
+/* ---------- ۶) لینک‌های داخل صفحه زیر هدر نروند ---------- */
+section[id] {
+  scroll-margin-top: 110px;
+}
+
+/* ===== NILVAMOON PATCH END ===== */
+/* ---------- رفع باگ منو: منو و جستجو باید شناور باشند ---------- */
+.site-header .header-dropdown,
+.site-header .header-search-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  z-index: 200;
+  margin: 0;
+  height: auto;
+}
+
+/* منو */
+.site-header .header-dropdown {
+  left: 0;
+  right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: min(230px, calc(100vw - 24px));
+  padding: 12px;
+  direction: rtl;
+  border-radius: 22px;
+  border: 1px solid rgba(122, 18, 56, 0.16);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 249, 240, 0.98),
+    rgba(245, 232, 239, 0.97) 55%,
+    rgba(233, 222, 241, 0.98)
+  );
+  box-shadow:
+    0 16px 42px rgba(26, 11, 61, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.site-header .header-dropdown a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 13px;
+  color: var(--foreground);
+  font-size: 14px;
+  text-decoration: none;
+}
+.site-header .header-dropdown a:hover {
+  color: var(--plum);
+  background: rgba(231, 168, 184, 0.18);
+}
+
+.dark .site-header .header-dropdown {
+  border-color: rgba(240, 196, 108, 0.24);
+  background: linear-gradient(
+    145deg,
+    rgba(42, 21, 99, 0.98),
+    rgba(26, 11, 61, 0.99) 65%,
+    rgba(65, 16, 56, 0.98)
+  );
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+.dark .site-header .header-dropdown a {
+  color: #fff9f0;
+}
+.dark .site-header .header-dropdown a:hover {
+  color: #f0c46c;
+  background: rgba(139, 42, 120, 0.2);
+}
+
+/* جستجو */
+.site-header .header-search-panel {
+  right: 0;
+  left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(360px, calc(100vw - 24px));
+  min-height: 58px;
+  padding: 14px 17px;
+  box-sizing: border-box;
+  direction: rtl;
+  color: var(--muted);
+  border: 1px solid rgba(122, 18, 56, 0.16);
+  border-radius: 22px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 249, 240, 0.985),
+    rgba(245, 232, 239, 0.98) 55%,
+    rgba(233, 222, 241, 0.985)
+  );
+  box-shadow: 0 16px 42px rgba(26, 11, 61, 0.16);
+}
+.dark .site-header .header-search-panel {
+  border-color: rgba(231, 218, 245, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 11, 61, 0.985),
+    rgba(42, 21, 99, 0.98) 55%,
+    rgba(70, 24, 76, 0.985)
+  );
+}
+/* ---------- آیکون‌های هدر دقیقاً وسط دکمه ---------- */
+.header-icon-button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  line-height: 0;
+  color: var(--violet);
+  cursor: pointer;
+  border-radius: 50%;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.header-icon-button svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .header-icon-button {
+    width: 38px;
+    height: 38px;
+  }
+  .header-icon-button svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* ---------- نماد کارت‌های «فال‌ها» (اندازه‌اش پاک شده بود) ---------- */
+.experience-symbol {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  transition: transform 0.35s ease;
+}
+
+/* ---------- فاصلهٔ حروف در فارسی باید صفر باشد (حروف را از هم جدا می‌کند) ---------- */
+.hero-eyebrow,
+.section-eyebrow {
+  letter-spacing: 0;
+}
+/* ---------- شیشهٔ مات یکسان در همهٔ مرورگرها ---------- */
+.header-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.64) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.56) 100%
+  );
+  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.08);
+  backdrop-filter: blur(24px) saturate(200%) brightness(1.08);
+}
+
+.dark .header-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(92, 68, 128, 0.62) 0%,
+    rgba(46, 32, 76, 0.5) 50%,
+    rgba(76, 42, 88, 0.56) 100%
+  );
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
+  backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
+}
+
+/* مرورگری که بلور را پشتیبانی نکند */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .header-glass {
+    background: rgba(250, 244, 246, 0.92);
+  }
+  .dark .header-glass {
+    background: rgba(40, 28, 62, 0.92);
+  }
+}
+.brand-symbol {
+  width: 18px;
+  height: 18px;
+  font-size: 0;
+}
+
+@media (max-width: 600px) {
+  .brand-symbol {
+    width: 16px;
+    height: 16px;
+  }
+}
