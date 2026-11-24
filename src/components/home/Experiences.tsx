@@ -1,76 +1,120 @@
-const experiences = [
+import Image from "next/image";
+
+type ExperienceKind = "hafez" | "coffee" | "tarot";
+
+const experiences: {
+  id: string;
+  kind: ExperienceKind;
+  image: string;
+  category: string;
+  number: string;
+  title: string;
+  description: string;
+  action: string;
+  note: string;
+}[] = [
   {
-    category: "فال حافظ",
-    symbol: "✧",
-    title: "غزل با معنی و تفسیر",
+    id: "hafez",
+    kind: "hafez",
+    image: "/images/experiences/hafez.jpg",
+    category: "شعر و معنا",
+    number: "۰۱",
+    title: "فال حافظ",
     description:
-      "نیت کن و غزل حافظ رو باز کن؛ هم شعر رو بخون و هم معنی و پیامش رو برای امروز و نیتت ببین.",
-    link: "#fortunes",
-    className: "experience-fortune",
-    action: "گرفتن فال حافظ",
+      "نیتی در دل کن و به دنیای غزل‌های حافظ قدم بگذار؛ با متن شعر، معنی روان و برداشتی برای تأمل بیشتر.",
+    action: "رفتن به دنیای حافظ",
+    note: "یک غزل، چند لایه معنا",
   },
   {
-    category: "فال قهوه",
-    symbol: "☕",
-    title: "تعبیر و تفسیر نقش های فنجان قهوه",
+    id: "coffee",
+    kind: "coffee",
+    image: "/images/experiences/coffee.jpg",
+    category: "نشانه‌ها و نمادها",
+    number: "۰۲",
+    title: "فال قهوه",
     description:
-      "سراغ نشانه ها و شکل های توی فنجان قهوه برو و ببین چه پیام و روایتی برات شکل گرفته.",
-    link: "#coffee",
-    className: "experience-coffee",
-    action: "دیدن فال قهوه",
+      "با نقش‌های فنجان همراه شو و با نمادها و روایت‌های سنتی فال قهوه بیشتر آشنا شو.",
+    action: "کشف نقش‌های فنجان",
+    note: "روایت نمادها در فنجان",
   },
   {
-    category: "تاروت",
-    symbol: "☾",
-    title: "فال تاروت روزانه و احساسی",
+    id: "tarot",
+    kind: "tarot",
+    image: "/images/experiences/tarot.jpg",
+    category: "کارت و خودشناسی",
+    number: "۰۳",
+    title: "فال تاروت",
     description:
-      "کارت‌های تاروت رو با فکر به نیت‌ات انتخاب کن و با دریچه‌ای دیگه به مسیر پیش‌روت نگاه کن!",
-    link: "#tarot",
-    className: "experience-tarot",
-    action: "کشف دنیای تاروت",
+      "کارت‌ها را به چشم ابزاری نمادین برای مکث، پرسیدن سؤال‌های بهتر و نگاه تازه به موقعیتت ببین.",
+    action: "آشنایی با کارت‌ها",
+    note: "نمادهایی برای تأمل",
   },
 ];
 
 export default function Experiences() {
   return (
-    <section className="experiences-section" id="experiences">
+    <section
+      className="experiences-section"
+      id="experiences"
+      aria-labelledby="experiences-title"
+    >
       <div className="experiences-heading">
-        <span className="section-eyebrow">مسیرهای کشف و شهود</span>
+        <span className="section-eyebrow">✦ مسیرهای کشف و شهود ✦</span>
 
-        <h2>
-          کدوم فال رو امروز <span>میخوای؟</span>
+        <h2 id="experiences-title">
+          امروز دلت می‌خواد <span>کدوم دنیا رو کشف کنی؟</span>
         </h2>
 
         <p>
-          هر فال دنیای خودش رو داره؛ هر کدوم که امروز بیشتر به دلت میشینه رو
-          انتخاب کن.
+          از غزل‌های حافظ تا نمادهای تاروت و نقش‌های فنجان؛ راه خودت رو انتخاب
+          کن.
         </p>
       </div>
 
-      <div className="experiences-grid">
+      <div className="nova-grid">
         {experiences.map((item) => (
           <article
-            className={`experience-card ${item.className}`}
-            key={item.category}
+            className={`nova-card nova-card--${item.kind}`}
+            id={item.id}
+            key={item.id}
           >
-            <div className="experience-card-top">
-              <span className="experience-category">{item.category}</span>
-              <span className="experience-symbol">{item.symbol}</span>
+            <Image
+              src={item.image}
+              alt=""
+              fill
+              sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 31vw"
+              className="nova-image"
+            />
+
+            <div className="nova-top">
+              <span className="nova-category">{item.category}</span>
+              <span className="nova-index">{item.number}</span>
             </div>
 
-            <div className="experience-card-content">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
+            <div className="nova-panel">
+              <span className="nova-note">{item.note}</span>
 
-              <a href={item.link}>
-                {item.action}
-                <span aria-hidden="true"> ←</span>
-              </a>
+              <h3 className="nova-title">{item.title}</h3>
+
+              <p className="nova-desc">{item.description}</p>
+
+              <div className="nova-footer">
+                <span className="nova-action">{item.action}</span>
+                <span className="nova-status">در حال آماده‌سازی</span>
+              </div>
             </div>
-
-            <div className="experience-card-orbit" />
           </article>
         ))}
+      </div>
+
+      <div className="nova-cta-wrap">
+        {/* بعداً که صفحهٔ فال‌ها ساخته شد، فقط href را عوض کن؛ مثلاً href="/fal" */}
+        <a href="#experiences" className="glass-cta">
+          <span className="glass-cta-label">ادامه فال‌ها</span>
+          <span className="glass-cta-arrow" aria-hidden="true">
+            ←
+          </span>
+        </a>
       </div>
     </section>
   );

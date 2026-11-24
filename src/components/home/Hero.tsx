@@ -182,11 +182,6 @@ export default function Hero() {
             شروع فال و کشف
             <span aria-hidden="true">←</span>
           </a>
-
-          <div className="hero-note">
-            <span />
-            واقعی ، رایگان ، سریع و ساده
-          </div>
         </div>
         <div className="hero-visual" aria-label="سه کارت نمادین تاروت">
           <div className="hero-orbit orbit-one" />

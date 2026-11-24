@@ -113,6 +113,61 @@ textarea {
 }
 
 /* =================================
+   LIQUID GLASS FOUNDATION
+================================= */
+
+/* .glass-panel {
+  position: relative;
+  overflow: hidden;
+
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45);
+}
+
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.32),
+    transparent 35%,
+    transparent 70%,
+    rgba(255, 255, 255, 0.08)
+  );
+}
+
+.glass-panel > * {
+  position: relative;
+  z-index: 1;
+} */
+
+/* =================================
+   BRAND GLOW EFFECTS
+================================= */
+
+.glow-rose {
+  box-shadow: 0 0 45px rgba(231, 168, 184, 0.28);
+}
+
+.glow-violet {
+  box-shadow: 0 0 55px rgba(168, 160, 216, 0.25);
+}
+
+.glow-gold {
+  box-shadow: 0 0 35px rgba(217, 169, 95, 0.22);
+}
+/* =================================
    NILVAMOON — GLASS HEADER
 ================================= */
 
@@ -193,7 +248,22 @@ textarea {
   transform: translate(-50%, -50%);
 }
 
+/* DARK LIQUID GLASS */
 
+/* Dark frosted glass */
+.dark .header-glass {
+  background: rgba(40, 28, 62, 0.34);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 0 22px 4px rgba(255, 255, 255, 0.04);
+}
+.dark .header-glass::before {
+  background:
+    linear-gradient(115deg, rgba(255,255,255,.2), transparent 36%, transparent 70%, rgba(248,113,157,.14)),
+    radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.16), transparent 60%);
+}
 
 .header-side {
   display: flex;
@@ -212,12 +282,83 @@ textarea {
 }
 
 .header-icon-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 44px;
+  height: 44px;
+
+  border: 1px solid rgba(255, 255, 255, 0.68);
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.35);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+
+  color: var(--violet);
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.65),
+    rgba(255, 255, 255, 0.2)
+  );
+
+  backdrop-filter: blur(22px) saturate(190%);
+  -webkit-backdrop-filter: blur(22px) saturate(190%);
+
+  box-shadow:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.2),
+    0 5px 16px rgba(55, 35, 65, 0.1);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
+.header-icon-button svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.header-icon-button:hover,
+.header-icon-button.active {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.76);
+  border-color: rgba(159, 69, 105, 0.35);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    0 8px 22px rgba(84, 35, 63, 0.15);
+}
+
+.dark .header-icon-button {
+  color: #f5e7ed;
+  border-color: rgba(255, 255, 255, 0.2);
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.19),
+    rgba(255, 255, 255, 0.055)
+  );
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    0 5px 18px rgba(0, 0, 0, 0.22);
+}
+
+.dark .header-icon-button:hover,
+.dark .header-icon-button.active {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(231, 168, 184, 0.35);
+}
 .header-icon-button svg,
 .header-search-panel svg {
   width: 20px;
@@ -252,11 +393,18 @@ textarea {
 
 .brand-symbol {
   position: absolute;
-  top: -9px;
-  left: -20px;
+  top: 1px;
+  left: -23px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 24px;
   color: var(--plum);
-  font-size: 20px;
+  font-size: 21px;
   line-height: 1;
+  text-shadow: 0 0 12px rgba(159, 69, 105, 0.28);
+  pointer-events: none;
 }
 
 .brand-name {
@@ -276,7 +424,47 @@ textarea {
   letter-spacing: 2.1px;
 }
 
+@media (max-width: 600px) {
+  .brand-symbol {
+    top: 0;
+    left: -19px;
+    width: 17px;
+    height: 21px;
+    font-size: 18px;
+  }
 
+  .brand-name {
+    font-size: 21px;
+  }
+
+  .brand-caption {
+    font-size: 7px;
+    letter-spacing: 1.7px;
+  }
+}
+
+.header--panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  z-index: 20;
+  border: 1px solid rgba(122, 18, 56, 0.16);
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 249, 240, 0.98),
+    rgba(245, 232, 239, 0.97) 55%,
+    rgba(233, 222, 241, 0.98)
+  );
+
+  backdrop-filter: blur(28px) saturate(145%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+
+  box-shadow:
+    0 16px 42px rgba(26, 11, 61, 0.14),
+    0 4px 12px rgba(26, 11, 61, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
 
 .header-dropdown {
   left: 0;
@@ -361,6 +549,10 @@ textarea {
 .header-search-panel input::placeholder {
   color: var(--muted);
   opacity: 0.8;
+}
+
+.landing-main {
+  min-height: calc(100vh - 110px);
 }
 
 /* Dark theme — liquid glass */
@@ -565,82 +757,139 @@ textarea {
   white-space: nowrap;
 }
 
-.hero-button:hover {
-  transform: translateY(-4px);
-  filter: brightness(1.04);
-  border-color: rgba(255, 238, 190, 0.95);
+
+
+
+/* =========================================
+   NILVAMOON — PREMIUM LIQUID GLASS BUTTON
+========================================= */
+
+.hero-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 15px 34px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  color: #54233f;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.76),
+      rgba(255, 255, 255, 0.32) 48%,
+      rgba(215, 166, 183, 0.3)
+    );
+
+  backdrop-filter: blur(26px) saturate(190%);
+  -webkit-backdrop-filter: blur(26px) saturate(190%);
+
   box-shadow:
-    0 16px 36px rgba(152, 84, 119, 0.35),
-    0 6px 18px rgba(198, 154, 85, 0.28),
-    inset 0 1px 2px rgba(255, 255, 255, 0.45);
+    inset 0 2px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 5px rgba(84, 35, 63, 0.08),
+    0 8px 18px rgba(84, 35, 63, 0.12),
+    0 18px 38px rgba(84, 35, 63, 0.09);
+
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.hero-button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.72),
+    transparent 42%,
+    transparent 70%,
+    rgba(255, 255, 255, 0.2)
+  );
+
+  pointer-events: none;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 1),
+    0 13px 26px rgba(84, 35, 63, 0.16),
+    0 22px 42px rgba(84, 35, 63, 0.1);
+}
+
+.hero-button:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 .hero-button span {
-  font-size: 20px;
+  position: relative;
+  z-index: 1;
   color: #c9a05a;
+  font-size: 20px;
   transition: transform 0.3s ease;
 }
 
 .hero-button:hover span {
   transform: translateX(-5px);
 }
-/* ========== حالت شب ========== */
+
+/* Dark Mode */
+
 .dark .hero-button {
-  border-color: rgba(255, 255, 255, 0.22);
+  color: #fff0f5;
+  border-color: rgba(255, 255, 255, 0.26);
+
   background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(180, 140, 200, 0.1) 100%
+    135deg,
+    rgba(159, 69, 105, 0.62),
+    rgba(84, 35, 63, 0.5)
   );
-  color: #f8f0f5;
+
   box-shadow:
-    0 10px 32px rgba(0, 0, 0, 0.35),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.05);
+    inset 0 1px 2px rgba(255, 255, 255, 0.28),
+    0 10px 26px rgba(0, 0, 0, 0.24),
+    0 18px 40px rgba(84, 35, 63, 0.24);
 }
 
 .dark .hero-button::before {
   background: linear-gradient(
-    125deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    transparent 40%,
+    115deg,
+    rgba(255, 255, 255, 0.28),
+    transparent 45%,
     transparent 70%,
-    rgba(240, 180, 220, 0.12) 100%
+    rgba(240, 180, 220, 0.13)
   );
 }
 
 .dark .hero-button:hover {
   background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.18) 0%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(200, 150, 220, 0.15) 100%
+    135deg,
+    rgba(180, 90, 130, 0.7),
+    rgba(84, 35, 63, 0.58)
   );
 }
 
 .dark .hero-button span {
   color: #f0c46c;
 }
-.hero-note {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 25px;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.hero-note > span {
-  width: 7px;
-  height: 7px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: #d69e2e;
-  box-shadow: 0 0 13px rgba(214, 158, 46, 0.75);
-}
-
 /* Tarot visual */
 
 .hero-visual {
@@ -849,63 +1098,6 @@ textarea {
 }
 
 /* Scroll indicator */
-
-.hero-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 15px 32px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.28) 0%,
-    rgba(255, 255, 255, 0.12) 50%,
-    rgba(255, 255, 255, 0.18) 100%
-  );
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  color: #2a1f35;
-  font-size: 15px;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow:
-    0 10px 30px rgba(40, 20, 60, 0.15),
-    inset 0 1px 1px rgba(255, 255, 255, 0.7),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-
-.hero-button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    125deg,
-    rgba(255, 255, 255, 0.5) 0%,
-    transparent 40%,
-    transparent 70%,
-    rgba(255, 220, 180, 0.15) 100%
-  );
-  pointer-events: none;
-}
-
-.hero-button:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.38) 0%,
-    rgba(255, 255, 255, 0.18) 50%,
-    rgba(255, 255, 255, 0.25) 100%
-  );
-  box-shadow:
-    0 16px 40px rgba(40, 20, 60, 0.22),
-    inset 0 1px 1px rgba(255, 255, 255, 0.85);
-}
 
 .hero-scroll-line {
   width: 1px;
@@ -1675,11 +1867,6 @@ textarea {
   color: var(--plum);
 }
 
-/* ---------- ۶) لینک‌های داخل صفحه زیر هدر نروند ---------- */
-section[id] {
-  scroll-margin-top: 110px;
-}
-
 /* ===== NILVAMOON PATCH END ===== */
 /* ---------- رفع باگ منو: منو و جستجو باید شناور باشند ---------- */
 .site-header .header-dropdown,
@@ -1779,96 +1966,1826 @@ section[id] {
     rgba(70, 24, 76, 0.985)
   );
 }
-/* ---------- آیکون‌های هدر دقیقاً وسط دکمه ---------- */
-.header-icon-button {
+/* =========================================
+   NILVAMOON — HOMEPAGE REFINEMENT
+   Append this block to the end of globals.css
+========================================= */
+
+:root {
+  --plum-deep: #54233f;
+  --berry: #9f4569;
+  --rose-soft: #d7a6b7;
+  --champagne: #c9a66b;
+  --paper: #f7f0eb;
+  --ink-plum: #302431;
+}
+
+html { scroll-padding-top: 105px; }
+
+/* Experience cards: editorial image treatment */
+.experiences-section {
+  padding-top: clamp(76px, 9vw, 116px);
+  padding-bottom: clamp(76px, 9vw, 116px);
+}
+
+.experiences-heading { margin-bottom: 48px; }
+.experiences-heading h2 span,
+.journal-heading h2 span,
+.about-inner h2 span { color: var(--berry); }
+
+.experiences-grid { align-items: stretch; gap: 22px; }
+
+.experience-card {
+  position: relative;
+  isolation: isolate;
+  min-height: 430px;
+  padding: 28px 27px 30px;
+  overflow: hidden;
+  border: 1px solid rgba(105, 62, 82, .12);
+  border-radius: 30px;
+  box-shadow: 0 18px 48px rgba(58, 35, 51, .09), inset 0 1px 0 rgba(255,255,255,.78);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.experience-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.28) 45%, rgba(255,255,255,.88) 100%);
+  pointer-events: none;
+}
+
+.experience-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 27px 60px rgba(58, 35, 51, .15), inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+.experience-fortune {
+  color: #63364f;
+  background: radial-gradient(ellipse at 76% 23%, rgba(196,139,93,.28), transparent 48%), linear-gradient(145deg,#f8eee5 0%,#ead5d8 100%);
+}
+.experience-coffee {
+  color: #694a3c;
+  background: radial-gradient(ellipse at 75% 22%, rgba(169,112,75,.25), transparent 48%), linear-gradient(145deg,#f7eee3 0%,#e8d4c5 100%);
+}
+.experience-tarot {
+  color: #51405f;
+  background: radial-gradient(ellipse at 75% 22%, rgba(143,103,164,.27), transparent 48%), linear-gradient(145deg,#f2eaf3 0%,#dcd1e5 100%);
+}
+
+.experience-art-wrap {
+  position: absolute;
+  z-index: 0;
+  top: 32px;
+  left: -4px;
+  width: min(76%, 290px);
+  height: 230px;
+  color: currentColor;
+  opacity: .27;
+  filter: blur(1.2px);
+  pointer-events: none;
+  transition: opacity .35s ease, transform .45s ease;
+}
+.experience-artwork { display: block; width: 100%; height: 100%; overflow: visible; }
+.experience-card:hover .experience-art-wrap { opacity: .38; transform: translateY(-4px) scale(1.025); }
+
+.experience-card-top,
+.experience-card-content { position: relative; z-index: 2; }
+.experience-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.experience-category {
+  display: inline-flex;
+  align-items: center;
+  min-height: 31px;
+  padding: 6px 12px;
+  border: 1px solid rgba(91,56,76,.13);
+  border-radius: 30px;
+  color: #68465c;
+  background: rgba(255,255,255,.5);
+  font-size: 11px;
+  font-weight: 800;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.experience-index { color: currentColor; opacity: .55; font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+.experience-card-content { margin-top: 175px; }
+.experience-note { display: block; margin-bottom: 8px; color: currentColor; opacity: .7; font-size: 11px; font-weight: 700; }
+.experience-card-content h3 { margin: 0 0 10px; color: #392b3b; font-size: clamp(22px, 2vw, 26px); font-weight: 850; line-height: 1.55; }
+.experience-card-content p { min-height: 82px; margin: 0 0 18px; color: #645765; font-size: 13px; line-height: 2.05; }
+.experience-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--plum-deep); font-size: 12px; font-weight: 850; }
+.experience-status { padding: 5px 9px; border: 1px solid rgba(84,35,63,.14); border-radius: 20px; color: #77566a; background: rgba(255,255,255,.36); font-size: 9px; font-weight: 700; white-space: nowrap; }
+.experience-card-watermark { position: absolute; left: 24px; bottom: 18px; color: currentColor; opacity: .16; font-size: 42px; pointer-events: none; }
+.experiences-disclaimer { width: min(850px, 100%); margin: 28px auto 0; color: var(--muted); font-size: 11px; line-height: 2; text-align: center; }
+
+/* Editorial journal section */
+.journal-section {
+  position: relative;
+  padding: clamp(76px, 9vw, 112px) 7%;
+  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(235,220,228,.35));
+}
+.journal-heading { width: min(660px, 100%); margin: 0 auto 42px; text-align: center; }
+.journal-heading h2 { margin: 13px 0; color: var(--foreground); font-size: clamp(30px, 4vw, 43px); line-height: 1.55; }
+.journal-heading p { margin: 0; color: var(--muted); font-size: 14px; line-height: 2.1; }
+.journal-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; width: min(1160px,100%); margin: 0 auto; }
+.journal-card {
+  position: relative;
+  min-height: 245px;
+  padding: 27px 25px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--glass-bg);
+  box-shadow: 0 14px 38px rgba(49,32,48,.06), inset 0 1px 0 rgba(255,255,255,.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.journal-number { color: var(--berry); font-size: 12px; font-weight: 800; }
+.journal-tag { display: inline-flex; margin: 20px 0 8px; padding: 5px 10px; border-radius: 20px; color: var(--berry); background: rgba(159,69,105,.09); font-size: 10px; font-weight: 800; }
+.journal-card h3 { position: relative; z-index: 1; margin: 0 0 9px; color: var(--foreground); font-size: 18px; line-height: 1.7; }
+.journal-card p { position: relative; z-index: 1; max-width: 290px; margin: 0; color: var(--muted); font-size: 12px; line-height: 2.05; }
+.journal-card-mark { position: absolute; left: 18px; bottom: 4px; color: var(--berry); opacity: .12; font-size: 82px; }
+
+/* About and footer */
+.about-section { padding: 84px 7%; }
+.about-inner { width: min(820px,100%); margin: 0 auto; padding: clamp(30px,5vw,58px); border: 1px solid var(--glass-border); border-radius: 30px; background: var(--glass-bg); box-shadow: var(--glass-shadow); text-align: center; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.about-inner h2 { margin: 14px 0; color: var(--foreground); font-size: clamp(27px,3.8vw,39px); line-height: 1.65; }
+.about-inner p { max-width: 660px; margin: 0 auto 22px; color: var(--muted); font-size: 14px; line-height: 2.2; }
+.about-link { display: inline-flex; align-items: center; gap: 9px; color: var(--berry); font-size: 13px; font-weight: 850; text-decoration: none; }
+.site-footer { padding: 42px 7% 20px; color: #f5edf1; background: linear-gradient(135deg,#30202f,#211a2a 72%,#3b2438); }
+.footer-main { display: flex; align-items: center; justify-content: space-between; gap: 22px; width: min(1160px,100%); margin: 0 auto 35px; }
+.footer-brand { color: #f7e9ee; font-size: 22px; font-weight: 850; text-decoration: none; }
+.footer-brand span { color: #d7b77c; }
+.footer-main p { margin: 0; color: rgba(255,255,255,.68); font-size: 12px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+.footer-links a { color: rgba(255,255,255,.78); font-size: 12px; text-decoration: none; }
+.footer-links a:hover { color: #e6c58b; }
+.footer-bottom { display: flex; justify-content: space-between; gap: 12px; width: min(1160px,100%); margin: 0 auto; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.13); color: rgba(255,255,255,.48); font-size: 10px; }
+
+/* Search panel */
+.header-search-panel { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.header-search-panel input { flex: 1; min-width: 0; }
+.header-search-panel > button { border: 0; border-radius: 12px; padding: 9px 14px; color: #fff; background: var(--berry); font: inherit; font-size: 12px; cursor: pointer; }
+.search-feedback { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+
+.dark .experience-card::before { background: linear-gradient(180deg,rgba(28,20,35,.03),rgba(28,20,35,.22) 40%,rgba(28,20,35,.82) 100%); }
+.dark .experience-fortune { background: radial-gradient(ellipse at 76% 23%,rgba(183,125,96,.22),transparent 48%),linear-gradient(145deg,#503448,#35283b); }
+.dark .experience-coffee { background: radial-gradient(ellipse at 75% 22%,rgba(171,111,77,.2),transparent 48%),linear-gradient(145deg,#49372f,#30272d); }
+.dark .experience-tarot { background: radial-gradient(ellipse at 75% 22%,rgba(145,111,175,.24),transparent 48%),linear-gradient(145deg,#42344f,#2d263b); }
+.dark .experience-card-content h3 { color: #f5eaf0; }
+.dark .experience-card-content p { color: #d0c2ce; }
+.dark .experience-category { color: #f0dce7; border-color: rgba(255,255,255,.16); background: rgba(31,23,38,.42); }
+.dark .experience-card-footer { color: #e4b8c9; }
+.dark .experience-status { color: #e9cbd8; border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.08); }
+.dark .journal-section { background: linear-gradient(180deg,rgba(22,17,31,.16),rgba(22,17,31,.28)); }
+.dark .journal-card { border-color: rgba(255,255,255,.12); }
+.dark .journal-tag { color: #e7b8ca; background: rgba(215,166,183,.12); }
+.dark .experiences-heading h2 span,
+.dark .journal-heading h2 span,
+.dark .about-inner h2 span { color: #d9a5ba; }
+
+@media (max-width: 900px) {
+  .experiences-grid, .journal-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .experience-card:last-child, .journal-card:last-child { grid-column: 1 / -1; }
+  .footer-main { flex-direction: column; text-align: center; }
+}
+@media (max-width: 600px) {
+  .experiences-grid, .journal-grid { grid-template-columns: 1fr; }
+  .experience-card:last-child, .journal-card:last-child { grid-column: auto; }
+  .experience-card { min-height: 405px; }
+  .experience-art-wrap { width: 75%; height: 210px; }
+  .experience-card-content { margin-top: 160px; }
+  .journal-card { min-height: 210px; }
+  .about-section { padding: 55px 5%; }
+  .footer-links { justify-content: center; gap: 13px; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .experience-card, .experience-art-wrap { transition: none !important; }
+}
+
+/* Floating glass panels */
+
+.site-header .header-dropdown,
+.site-header .header-search-panel {
+  border: 1px solid rgba(255, 255, 255, 0.65);
+
+  background: rgba(250, 244, 246, 0.72);
+
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+
+  box-shadow:
+    0 18px 42px rgba(48, 36, 49, 0.13),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+.dark .site-header .header-dropdown,
+.dark .site-header .header-search-panel {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(38, 28, 49, 0.76);
+
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.14);
+}
+/* =========================================
+   NILVAMOON — FROSTED GLASS HEADER RESTORE
+========================================= */
+
+.site-header {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  isolation: isolate;
+}
+
+.header-glass {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+
+  border: 1px solid rgba(255, 255, 255, 0.48) !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.58),
+      rgba(255, 246, 251, 0.28) 48%,
+      rgba(239, 222, 241, 0.38)
+    ) !important;
+
+  -webkit-backdrop-filter: blur(32px) saturate(185%) !important;
+  backdrop-filter: blur(32px) saturate(185%) !important;
+
+  box-shadow:
+    0 12px 38px rgba(66, 35, 60, 0.12),
+    0 3px 10px rgba(66, 35, 60, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.2) !important;
+}
+
+.header-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.58),
+      transparent 38%,
+      transparent 72%,
+      rgba(231, 177, 205, 0.18)
+    ),
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(255, 255, 255, 0.5),
+      transparent 72%
+    );
+}
+
+.header-glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark mode */
+.dark .header-glass {
+  border-color: rgba(255, 255, 255, 0.16) !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(65, 48, 68, 0.72),
+      rgba(38, 29, 48, 0.62),
+      rgba(76, 43, 68, 0.58)
+    ) !important;
+
+  -webkit-backdrop-filter: blur(32px) saturate(175%) !important;
+  backdrop-filter: blur(32px) saturate(175%) !important;
+
+  box-shadow:
+    0 12px 38px rgba(0, 0, 0, 0.24),
+    inset 0 1px 1px rgba(255, 255, 255, 0.13) !important;
+}
+
+.dark .header-glass::before {
+  background:
+    linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.16),
+      transparent 42%,
+      transparent 72%,
+      rgba(235, 151, 195, 0.12)
+    );
+}
+
+/* Mobile and tablet */
+@media (max-width: 768px) {
+  .site-header {
+    width: calc(100% - 24px);
+    top: 10px;
+    margin-top: 10px;
+  }
+
+  .header-glass {
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+  }
+}
+
+/* Browsers without backdrop-filter */
+@supports not (
+  (backdrop-filter: blur(1px)) or
+  (-webkit-backdrop-filter: blur(1px))
+) {
+  .header-glass {
+    background: rgba(250, 240, 247, 0.94) !important;
+  }
+
+  .dark .header-glass {
+    background: rgba(42, 32, 48, 0.96) !important;
+  }
+}
+/* =========================================
+   NILVAMOON — PINK LIQUID GLASS CTA
+========================================= */
+
+.hero-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  margin-top: 8px;
+  padding: 16px 36px;
+
+  color: #713d59 !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.78) !important;
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 224, 237, 0.82),
+      rgba(231, 174, 201, 0.56) 48%,
+      rgba(248, 221, 234, 0.76)
+    ) !important;
+
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+
+  box-shadow:
+    0 10px 28px rgba(170, 91, 130, 0.19),
+    0 3px 10px rgba(170, 91, 130, 0.10),
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.3);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.hero-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.72),
+      transparent 42%,
+      transparent 72%,
+      rgba(255, 255, 255, 0.28)
+    );
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 211, 230, 0.95),
+      rgba(220, 151, 185, 0.76),
+      rgba(248, 215, 232, 0.9)
+    ) !important;
+
+  box-shadow:
+    0 15px 34px rgba(170, 91, 130, 0.27),
+    inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+
+.hero-button span {
+  color: #9f4569 !important;
+}
+
+.dark .hero-button {
+  color: #ffeaf3 !important;
+
+  border-color: rgba(255, 255, 255, 0.22) !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(185, 112, 151, 0.42),
+      rgba(117, 66, 103, 0.55),
+      rgba(204, 139, 176, 0.32)
+    ) !important;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22);
+}
+
+.dark .hero-button span {
+  color: #ffd5e7 !important;
+}
+
+/* =========================================
+   NILVAMOON — LUXURY EXPERIENCE CARDS
+   Editorial Photography + Soft Liquid Glass
+========================================= */
+
+.experience-card {
+  position: relative;
+  isolation: isolate;
+  min-height: 430px;
+  overflow: hidden;
+  border-radius: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.58);
+
+  background: #eadde0;
+
+  box-shadow:
+    0 12px 34px rgba(75, 35, 55, 0.075),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Background photography */
+.experience-image-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.experience-image {
+  object-fit: cover;
+  object-position: center 45%;
+
+  transform: scale(1.035);
+
+  filter: blur(1.2px) saturate(0.96) brightness(1.02);
+
+  opacity: 0.88;
+
+  transition:
+    transform 0.7s ease,
+    filter 0.7s ease,
+    opacity 0.7s ease;
+}
+
+/* Elegant image overlay */
+.experience-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 248, 247, 0.04) 0%,
+      rgba(255, 247, 246, 0.12) 30%,
+      rgba(250, 239, 238, 0.48) 58%,
+      rgba(248, 239, 237, 0.91) 100%
+    );
+}
+
+/* Subtle glass reflection */
+.experience-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.24) 0%,
+      transparent 35%,
+      transparent 75%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+
+  opacity: 0.65;
+}
+
+/* Content above image */
+.experience-card-top,
+.experience-card-content,
+.experience-card-watermark {
+  position: relative;
+  z-index: 2;
+}
+
+.experience-card-content {
+  margin-top: 175px;
+}
+
+/* Individual card identities */
+.experience-hafez {
+  color: #63364f;
+  background: #ead5d8;
+}
+
+.experience-coffee {
+  color: #694a3c;
+  background: #e8d4c5;
+}
+
+.experience-tarot {
+  color: #51405f;
+  background: #dcd1e5;
+}
+
+/* Hover interaction */
+.experience-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 20px 45px rgba(75, 35, 55, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.experience-card:hover .experience-image {
+  transform: scale(1.075);
+  filter: blur(0.5px) saturate(1.04) brightness(1.03);
+  opacity: 0.96;
+}
+
+/* Dark mode */
+.dark .experience-card {
+  border-color: rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dark .experience-card::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(25, 19, 30, 0.08) 0%,
+      rgba(25, 19, 30, 0.24) 30%,
+      rgba(30, 22, 35, 0.70) 60%,
+      rgba(30, 22, 35, 0.94) 100%
+    );
+}
+
+.dark .experience-card::after {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12),
+      transparent 38%,
+      transparent 75%,
+      rgba(255, 255, 255, 0.025)
+    );
+}
+
+.dark .experience-hafez {
+  background: #503448;
+}
+
+.dark .experience-coffee {
+  background: #49372f;
+}
+
+.dark .experience-tarot {
+  background: #42344f;
+}
+
+.dark .experience-card:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .experience-card {
+    min-height: 420px;
+  }
+
+  .experience-card-content {
+    margin-top: 165px;
+  }
+}
+
+@media (max-width: 600px) {
+  .experience-card {
+    min-height: 410px;
+    border-radius: 25px;
+  }
+
+  .experience-image {
+    object-position: center 42%;
+  }
+
+  .experience-card-content {
+    margin-top: 155px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .experience-card,
+  .experience-image {
+    transition: none !important;
+  }
+}
+@media (max-width: 900px) {
+  .experiences-grid { max-width: none; }
+}
+/* === NILVAMOON — Fal cards readability (light mode) === */
+
+/* پوشش سفید زودتر کدر می‌شود تا متن روی عکس خام نیفتد */
+.experience-card::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 247, 0.10) 0%,
+    rgba(255, 248, 247, 0.30) 28%,
+    rgba(252, 244, 242, 0.80) 50%,
+    rgba(250, 241, 239, 0.95) 100%
+  );
+}
+
+.experience-card-content h3 { color: #2b1f2e; }
+
+.experience-card-content p {
+  color: #4a3d4e;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.experience-note {
+  opacity: 1;
+  color: #6b3f5a;
+  font-size: 12px;
+}
+
+.experience-category {
+  color: #54233f;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.experience-index {
+  opacity: 1;
+  color: #54233f;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.experience-card-footer { font-size: 13px; }
+
+.experience-status {
+  font-size: 11px;
+  color: #5d3a50;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* حفظ حالت تاریک برای دو المانی که قاعدهٔ .dark نداشتند */
+.dark .experience-note { color: #f0dce7; }
+.dark .experience-index { color: #f6dce9; background: rgba(31, 23, 38, 0.42); }
+
+@media (max-width: 480px) {
+  .experience-card-content p { font-size: 13.5px; }
+}
+/* =========================================
+   NILVAMOON — FAL CARDS V2 (عکس بالا + پنل متن)
+========================================= */
+
+.fal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: min(1160px, 100%);
+  margin: 0 auto;
+  direction: rtl;
+}
+
+.fal-card {
+  --accent: #8a5a1f;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(84, 35, 63, 0.1);
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow:
+    0 18px 44px rgba(58, 35, 51, 0.1),
+    0 2px 6px rgba(58, 35, 51, 0.04);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.fal-card--hafez { --accent: #8a5a1f; }
+.fal-card--coffee { --accent: #8a4a32; }
+.fal-card--tarot { --accent: #6a4687; }
+
+.fal-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(84, 35, 63, 0.18);
+  box-shadow:
+    0 28px 60px rgba(58, 35, 51, 0.16),
+    0 4px 12px rgba(58, 35, 51, 0.06);
+}
+
+/* --- بخش عکس --- */
+.fal-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: linear-gradient(145deg, #f1e2e6, #e1d6ea);
+}
+
+.fal-image {
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fal-card:hover .fal-image {
+  transform: scale(1.06);
+}
+
+/* سایهٔ ملایم بالای عکس تا چیپ‌ها همیشه دیده شوند */
+.fal-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(35, 28, 46, 0.32) 0%,
+    rgba(35, 28, 46, 0) 38%,
+    rgba(35, 28, 46, 0) 75%,
+    rgba(35, 28, 46, 0.1) 100%
+  );
+}
+
+.fal-top {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  right: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.fal-category,
+.fal-index {
+  color: #3a2438;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 14px rgba(35, 28, 46, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.fal-category {
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.fal-index {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  padding: 0;
-  line-height: 0;
-  color: var(--violet);
-  cursor: pointer;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
+  font-size: 13px;
+  font-weight: 500;
 }
 
-.header-icon-button svg {
-  display: block;
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
+/* --- پنل متن --- */
+.fal-body {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px 26px 24px;
 }
 
+.fal-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.fal-note::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+.fal-title {
+  margin: 8px 0 10px;
+  color: #2b1f2e;
+  font-size: clamp(22px, 2vw, 26px);
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.fal-desc {
+  margin: 0 0 22px;
+  color: #4a3d4e;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 2.05;
+}
+
+.fal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(84, 35, 63, 0.12);
+}
+
+.fal-action {
+  color: #54233f;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.fal-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border: 1px solid rgba(159, 69, 105, 0.18);
+  border-radius: 999px;
+  color: #5d3a50;
+  background: rgba(159, 69, 105, 0.08);
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.fal-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* --- تاریک --- */
+.dark .fal-card {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.dark .fal-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(177, 111, 174, 0.1);
+}
+.dark .fal-card--hafez { --accent: #f0c46c; }
+.dark .fal-card--coffee { --accent: #eab08f; }
+.dark .fal-card--tarot { --accent: #cdb7ee; }
+.dark .fal-title { color: #fff4fa; }
+.dark .fal-desc { color: #d9ccd6; }
+.dark .fal-action { color: #f2d3e1; }
+.dark .fal-footer { border-top-color: rgba(255, 255, 255, 0.12); }
+.dark .fal-status {
+  color: #ecd3df;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* --- واکنش‌گرا --- */
+@media (max-width: 900px) {
+  .fal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fal-card:last-child { grid-column: 1 / -1; }
+  .fal-card:last-child .fal-media { aspect-ratio: 16 / 9; }
+}
 @media (max-width: 600px) {
-  .header-icon-button {
-    width: 38px;
-    height: 38px;
-  }
-  .header-icon-button svg {
-    width: 19px;
-    height: 19px;
+  .fal-grid { grid-template-columns: 1fr; }
+  .fal-card:last-child { grid-column: auto; }
+  .fal-card:last-child .fal-media { aspect-ratio: 4 / 3; }
+  .fal-card { border-radius: 24px; }
+  .fal-body { padding: 20px 20px 22px; }
+  .fal-desc { font-size: 13.5px; }
+}
+
+/* =========================================
+   NILVAMOON — MAGAZINE (مجله)
+========================================= */
+
+.mag-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  width: min(1160px, 100%);
+  margin: 0 auto;
+  direction: rtl;
+}
+
+.mag-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 26px;
+  background: rgba(251, 247, 248, 0.8);
+  box-shadow:
+    0 14px 38px rgba(49, 32, 48, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.mag-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 24px 54px rgba(49, 32, 48, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.mag-card--featured {
+  display: flex;
+  flex-direction: column;
+  grid-row: span 2;
+}
+
+.mag-card--compact {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+}
+
+.mag-media {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #f1e2e6, #e1d6ea);
+}
+
+.mag-card--featured .mag-media { aspect-ratio: 3 / 2; }
+.mag-card--compact .mag-media { min-height: 170px; }
+
+.mag-image {
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mag-card:hover .mag-image { transform: scale(1.07); }
+
+.mag-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px 24px;
+}
+
+.mag-card--featured .mag-body { padding: 26px 28px 28px; }
+
+.mag-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.mag-tag {
+  padding: 5px 12px;
+  border-radius: 999px;
+  color: var(--plum);
+  background: rgba(159, 69, 105, 0.1);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.mag-number {
+  color: var(--plum);
+  opacity: 0.8;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.mag-title {
+  margin: 0 0 8px;
+  color: var(--foreground);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+.mag-card--featured .mag-title {
+  font-size: clamp(22px, 2.2vw, 27px);
+}
+
+.mag-desc {
+  margin: 0;
+  color: #524859;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 2.05;
+}
+.mag-card--featured .mag-desc { font-size: 14.5px; }
+
+.mag-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 14px;
+  color: var(--plum);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+/* --- تاریک --- */
+.dark .mag-card {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(42, 34, 56, 0.74);
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.dark .mag-tag { background: rgba(229, 168, 194, 0.14); }
+.dark .mag-desc { color: var(--muted); }
+
+/* --- واکنش‌گرا --- */
+@media (max-width: 900px) {
+  .mag-grid { grid-template-columns: 1fr; }
+  .mag-card--featured { grid-row: auto; }
+}
+@media (max-width: 480px) {
+  .mag-card--compact { grid-template-columns: 104px 1fr; }
+  .mag-card--compact .mag-media { min-height: 150px; }
+  .mag-body,
+  .mag-card--featured .mag-body { padding: 16px 18px 18px; }
+  .mag-desc,
+  .mag-card--featured .mag-desc { font-size: 13px; }
+}
+
+/* =========================================
+   BONUS — ظاهر شدن نرم کارت‌ها هنگام اسکرول
+   (فقط در مرورگرهای پشتیبان؛ در بقیه بی‌اثر است)
+========================================= */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .mag-card {
+      animation: nm-reveal linear backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+    @keyframes nm-reveal {
+      from { opacity: 0; transform: translateY(28px); }
+    }
   }
 }
 
-/* ---------- نماد کارت‌های «فال‌ها» (اندازه‌اش پاک شده بود) ---------- */
-.experience-symbol {
+@media (prefers-reduced-motion: reduce) {
+  .fal-card,
+  .fal-image,
+  .mag-card,
+  .mag-image {
+    transition: none !important;
+  }
+}
+/* =========================================
+   NILVAMOON — NOVA CARDS (تمام‌تصویر + پنل شیشه‌ای تدریجی)
+========================================= */
+
+.nova-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: min(1160px, 100%);
+  margin: 0 auto;
+  direction: rtl;
+}
+
+.nova-card {
+  --accent: #8a5a1f;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 580px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 30px;
+  background: linear-gradient(145deg, #f1e2e6, #e1d6ea);
+  box-shadow:
+    0 22px 50px rgba(58, 35, 51, 0.16),
+    0 3px 8px rgba(58, 35, 51, 0.06);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease;
+}
+
+.nova-card--hafez { --accent: #8a5a1f; }
+.nova-card--coffee { --accent: #8a4a32; }
+.nova-card--tarot { --accent: #6a4687; }
+
+.nova-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 34px 70px rgba(58, 35, 51, 0.24),
+    0 6px 14px rgba(58, 35, 51, 0.08);
+}
+
+/* عکس تمام کارت */
+.nova-image {
+  z-index: 0;
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nova-card:hover .nova-image {
+  transform: scale(1.07);
+}
+
+/* سایهٔ نرم بالای عکس برای خوانایی چیپ‌ها */
+.nova-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(35, 28, 46, 0.34) 0%,
+    rgba(35, 28, 46, 0) 32%
+  );
+}
+
+/* چیپ‌های بالا */
+.nova-top {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  right: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.nova-category,
+.nova-index {
+  color: #3a2438;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 14px rgba(35, 28, 46, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nova-category {
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nova-index {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* پنل شیشه‌ای: بالا شفاف، پایین کاملاً مات */
+.nova-panel {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding: 100px 26px 24px;
+}
+
+.nova-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(251, 244, 246, 0.90);
+  backdrop-filter: blur(26px) saturate(160%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    rgba(0, 0, 0, 0.55) 46px,
+    #000 96px
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    rgba(0, 0, 0, 0.55) 46px,
+    #000 96px
+  );
+}
+
+/* خط براق نازک روی لبهٔ پنل */
+.nova-panel::after {
+  content: "";
+  position: absolute;
+  top: 70px;
+  right: 26px;
+  left: 26px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    transparent
+  );
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.nova-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+.nova-note::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+.nova-title {
+  margin: 8px 0 10px;
+  color: #2b1f2e;
+  font-size: clamp(22px, 2vw, 26px);
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.nova-desc {
+  margin: 0 0 20px;
+  color: #4a3d4e;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 2.05;
+}
+
+.nova-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(84, 35, 63, 0.14);
+}
+
+.nova-action {
+  color: #54233f;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.nova-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border: 1px solid rgba(159, 69, 105, 0.2);
+  border-radius: 999px;
+  color: #5d3a50;
+  background: rgba(159, 69, 105, 0.08);
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.nova-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* --- حالت تاریک --- */
+.dark .nova-card {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(145deg, #3a2c46, #241b35);
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.dark .nova-card:hover {
+  box-shadow:
+    0 34px 70px rgba(0, 0, 0, 0.55),
+    0 0 34px rgba(177, 111, 174, 0.14);
+}
+.dark .nova-card--hafez { --accent: #f0c46c; }
+.dark .nova-card--coffee { --accent: #eab08f; }
+.dark .nova-card--tarot { --accent: #cdb7ee; }
+.dark .nova-panel::before {
+  background: rgba(28, 21, 40, 0.82);
+}
+.dark .nova-panel::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+}
+.dark .nova-title { color: #fff4fa; }
+.dark .nova-desc { color: #dccfd9; }
+.dark .nova-action { color: #f2d3e1; }
+.dark .nova-footer { border-top-color: rgba(255, 255, 255, 0.14); }
+.dark .nova-status {
+  color: #ecd3df;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* --- واکنش‌گرا --- */
+@media (max-width: 900px) {
+  .nova-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nova-card:last-child { grid-column: 1 / -1; min-height: 520px; }
+}
+@media (max-width: 600px) {
+  .nova-grid { grid-template-columns: 1fr; }
+  .nova-card,
+  .nova-card:last-child { min-height: 560px; border-radius: 26px; }
+  .nova-panel { padding: 92px 20px 22px; }
+  .nova-desc { font-size: 13.5px; }
+}
+
+/* =========================================
+   NILVAMOON — دکمهٔ شیشه‌ای «ادامه فال‌ها»
+========================================= */
+
+.nova-cta-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 52px;
+}
+
+.glass-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 42px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  color: #54233f;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.72),
+    rgba(255, 255, 255, 0.3) 55%,
+    rgba(215, 166, 183, 0.38)
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 6px rgba(84, 35, 63, 0.08),
+    0 10px 26px rgba(84, 35, 63, 0.14),
+    0 22px 44px rgba(84, 35, 63, 0.08);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* درخششِ عبوری هنگام هاور */
+.glass-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -70%;
+  z-index: 0;
+  width: 50%;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.9s ease;
+  pointer-events: none;
+}
+
+.glass-cta:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 1),
+    0 16px 34px rgba(84, 35, 63, 0.2),
+    0 28px 50px rgba(84, 35, 63, 0.1);
+}
+.glass-cta:hover::before { left: 130%; }
+.glass-cta:active { transform: translateY(0) scale(0.98); }
+
+.glass-cta:focus-visible {
+  outline: 2px solid var(--plum);
+  outline-offset: 4px;
+}
+
+.glass-cta-label,
+.glass-cta-arrow {
+  position: relative;
+  z-index: 1;
+}
+.glass-cta-arrow {
+  color: #9f4569;
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+.glass-cta:hover .glass-cta-arrow { transform: translateX(-6px); }
+
+.dark .glass-cta {
+  color: #ffeaf3;
+  border-color: rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    135deg,
+    rgba(185, 112, 151, 0.42),
+    rgba(117, 66, 103, 0.55),
+    rgba(204, 139, 176, 0.3)
+  );
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.24),
+    0 12px 30px rgba(0, 0, 0, 0.3);
+}
+.dark .glass-cta::before {
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+}
+.dark .glass-cta-arrow { color: #ffd5e7; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nova-card,
+  .nova-image,
+  .glass-cta,
+  .glass-cta::before,
+  .glass-cta-arrow {
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   NILVAMOON — رنگ تأکیدی کارت‌های مجله
+========================================= */
+
+.fal-card--psychology { --accent: #8b2f63; }
+.fal-card--dreams { --accent: #5b5aa0; }
+.fal-card--lifestyle { --accent: #9a5a3c; }
+
+.dark .fal-card--psychology { --accent: #e5a8c2; }
+.dark .fal-card--dreams { --accent: #b9b4f0; }
+.dark .fal-card--lifestyle { --accent: #eab08f; }
+/* =========================================
+   NILVAMOON — FLOATING DOCK (نوار شناور پایین)
+========================================= */
+
+.dock {
+  position: fixed;
+  left: 50%;
+bottom: calc(16px + env(safe-area-inset-bottom, 0px));  z-index: 150;
+  width: 490px;
+  height: 140px;
+  animation: dock-in 0.6s ease 0.1s both;
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+}
+
+.dock-bar {
+  position: relative;
+  height: 140px;
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dock-shadow,
+.dock-rim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.dock-shadow {
+  filter: drop-shadow(0 12px 12px rgba(66, 35, 60, 0.16));
+}
+
+/* شیشه: با clip-path هم‌شکل نوار می‌شود تا بلور فقط داخل شکل اعمال شود */
+.dock-glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.62),
+    rgba(255, 246, 251, 0.3) 50%,
+    rgba(239, 222, 241, 0.42)
+  );
+  -webkit-backdrop-filter: blur(28px) saturate(185%);
+  backdrop-filter: blur(28px) saturate(185%);
+}
+
+.dock-ambient {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  z-index: -1;
+  width: 200px;
+  height: 130px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse,
+    rgba(201, 116, 154, 0.22),
+    rgba(201, 116, 154, 0.08) 40%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* گوی */
+.dock-bead {
+  position: absolute;
+  top: 10px;
+  left: 0;
   width: 58px;
   height: 58px;
-  border-radius: 18px;
-  transition: transform 0.35s ease;
+  border: 1.6px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  background: linear-gradient(
+    140deg,
+    #f3c3d6 0%,
+    #d98aab 40%,
+    #b85c86 82%,
+    #9f4569 100%
+  );
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 5px rgba(84, 35, 63, 0.25),
+    0 0 0 5px rgba(217, 138, 171, 0.12),
+    0 0 30px rgba(201, 116, 154, 0.25),
+    0 7px 16px rgba(84, 35, 63, 0.2);
+  will-change: transform;
+  pointer-events: none;
 }
 
-/* ---------- فاصلهٔ حروف در فارسی باید صفر باشد (حروف را از هم جدا می‌کند) ---------- */
-.hero-eyebrow,
-.section-eyebrow {
-  letter-spacing: 0;
+.dock-sheen {
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.35), transparent 50%);
 }
-/* ---------- شیشهٔ مات یکسان در همهٔ مرورگرها ---------- */
-.header-glass {
+
+/* دکمه‌ها */
+.dock-tabs {
+  position: absolute;
+  inset: 0 49px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.dock-tab {
+  position: relative;
+  min-width: 0;
+  height: 126px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dock-tab:hover {
+  color: var(--plum);
+}
+
+.dock-tab:focus-visible {
+  outline: 2px solid var(--plum);
+  outline-offset: -6px;
+  border-radius: 50%;
+}
+
+.dock-tab svg {
+  position: absolute;
+  top: 73px;
+  left: calc(50% - 11.5px);
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: color 0.25s;
+  will-change: transform;
+}
+
+.dock-label {
+  position: absolute;
+  top: 105px;
+  left: 50%;
+  transform: translate(-50%, 4px);
+  color: var(--plum);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.3s;
+  pointer-events: none;
+}
+
+.dock-tab[aria-current="true"] .dock-label {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* حالت تاریک */
+.dark .dock-glass {
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.64) 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    rgba(255, 255, 255, 0.56) 100%
+    rgba(65, 48, 68, 0.72),
+    rgba(38, 29, 48, 0.62),
+    rgba(76, 43, 68, 0.58)
   );
-  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.08);
-  backdrop-filter: blur(24px) saturate(200%) brightness(1.08);
 }
 
-.dark .header-glass {
-  background: linear-gradient(
-    135deg,
-    rgba(92, 68, 128, 0.62) 0%,
-    rgba(46, 32, 76, 0.5) 50%,
-    rgba(76, 42, 88, 0.56) 100%
-  );
-  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
-  backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
+.dark .dock-shadow path {
+  fill: rgba(40, 28, 52, 0.6);
 }
 
-/* مرورگری که بلور را پشتیبانی نکند */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .header-glass {
-    background: rgba(250, 244, 246, 0.92);
-  }
-  .dark .header-glass {
-    background: rgba(40, 28, 62, 0.92);
+.dark .dock-bead {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* جا برای نوار شناور در پایین سایت */
+.site-footer {
+  padding-bottom: 170px;
+}
+
+/* موبایل: نوار کوچک‌تر می‌شود بدون اینکه گوی از جایش خارج شود */
+@media (max-width: 520px) {
+  .dock {
+    transform: translateX(-50%) scale(0.7);
   }
 }
-.brand-symbol {
-  width: 18px;
-  height: 18px;
-  font-size: 0;
+
+@media (max-width: 400px) {
+  .dock {
+    transform: translateX(-50%) scale(0.64);
+  }
 }
 
-@media (max-width: 600px) {
-  .brand-symbol {
-    width: 16px;
-    height: 16px;
+@media (prefers-reduced-motion: reduce) {
+  .dock-bead,
+  .dock-tab svg,
+  .dock-label {
+    transition: none !important;
+  }
+}
+/* مجله: عکس‌ها کمی تار، با هاور واضح می‌شوند */
+.journal-section .fal-image {
+  filter: blur(3px) saturate(0.92);
+  transform: scale(1.08);
+  transition: filter 0.6s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.journal-section .fal-card:hover .fal-image {
+  filter: blur(0) saturate(1);
+  transform: scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journal-section .fal-image {
+    transition: none;
+  }
+}
+/* مجله: هم‌استایل فال‌ها، با عکس کمی تار */
+.journal-section .nova-image {
+  filter: blur(0.5px) saturate(0.95);
+  transform: scale(1.08);
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), filter 0.8s ease;
+}
+
+.journal-section .nova-card:hover .nova-image {
+  filter: blur(1px) saturate(1);
+  transform: scale(1.12);
+}
+
+.journal-section .nova-card--psychology { --accent: #8b2f63; }
+.journal-section .nova-card--dreams { --accent: #5b5aa0; }
+.journal-section .nova-card--lifestyle { --accent: #9a5a3c; }
+
+.dark .journal-section .nova-card--psychology { --accent: #e5a8c2; }
+.dark .journal-section .nova-card--dreams { --accent: #b9b4f0; }
+.dark .journal-section .nova-card--lifestyle { --accent: #eab08f; }
+
+@media (prefers-reduced-motion: reduce) {
+  .journal-section .nova-image {
+    transition: none;
+  }
+}
+@keyframes dock-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* ظاهر شدن نرم بخش‌ها هنگام اسکرول */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .experiences-heading,
+    .nova-card,
+    .journal-heading,
+    .about-inner {
+      animation: nm-rise linear backwards;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+
+    @keyframes nm-rise {
+      from {
+        opacity: 0;
+        transform: translateY(48px);
+      }
+    }
   }
 }
