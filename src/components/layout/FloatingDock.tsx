@@ -5,7 +5,7 @@ import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 const ITEMS: { label: string; href: string; icon: ReactNode }[] = [
   {
     label: "خانه",
-    href: "/",
+    href: "#home",
     icon: <path d="m3 10 9-7 9 7M5.5 9v11h5v-7h3v7h5V9" />,
   },
   {
@@ -56,7 +56,7 @@ export default function FloatingDock() {
   const shadowRef = useRef<SVGPathElement>(null);
   const rimRef = useRef<SVGPathElement>(null);
   const ambientRef = useRef<HTMLDivElement>(null);
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const tabRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const selectedRef = useRef(0);
   const centersRef = useRef<number[]>([]);
@@ -68,6 +68,7 @@ export default function FloatingDock() {
   const prevTimeRef = useRef(0);
 
   const [selected, setSelected] = useState(0);
+  const [ready, setReady] = useState(false);
 
   // رندر یک فریم: شکل نوار، گوی، هاله و بلند شدن آیکن‌ها
   function render() {
@@ -161,6 +162,7 @@ export default function FloatingDock() {
 
   useLayoutEffect(() => {
     measure();
+    setReady(true);
     const ro = new ResizeObserver(measure);
     if (barRef.current) ro.observe(barRef.current);
 
@@ -172,7 +174,10 @@ export default function FloatingDock() {
   }, []);
 
   return (
-    <nav className="dock" aria-label="ناوبری سریع">
+        <nav
+      className={`dock${ready ? " dock-ready" : ""}`}
+      aria-label="ناوبری سریع"
+    >
       <div className="dock-bar" ref={barRef}>
         <svg className="dock-shadow" aria-hidden="true" preserveAspectRatio="none">
           <path ref={shadowRef} fill="rgba(255,255,255,.6)" />
@@ -198,21 +203,24 @@ export default function FloatingDock() {
 
         <div className="dock-tabs" ref={tabsRef}>
           {ITEMS.map((item, i) => (
-            <button
-              key={item.label}
-              ref={(el) => {
-                tabRefs.current[i] = el;
-              }}
-              type="button"
-              className="dock-tab"
-              aria-current={i === selected ? "true" : undefined}
-              onClick={() => select(i)}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                {item.icon}
-              </svg>
-              <span className="dock-label">{item.label}</span>
-            </button>
+           <a
+  key={item.label}
+  ref={(el) => {
+    tabRefs.current[i] = el;
+  }}
+  href={item.href}
+  className="dock-tab"
+  aria-current={i === selected ? "true" : undefined}
+    onClick={(event) => {
+    event.preventDefault();
+    select(i);
+  }}
+>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    {item.icon}
+  </svg>
+  <span className="dock-label">{item.label}</span>
+</a>
           ))}
         </div>
       </div>
