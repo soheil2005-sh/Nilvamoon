@@ -3,6 +3,7 @@ import Header from "@/components/layout/header";
 import Hero from "@/components/home/Hero";
 import Experiences from "@/components/home/Experiences";
 import HowItWorks from "@/components/home/HowItWorks";
+import SymbolsAtlas from "@/components/home/SymbolsAtlas";   // ← خط جدید
 import Journal from "@/components/home/Journal";
 import About from "@/components/home/About";
 import Footer from "@/components/home/Footer";
@@ -43,11 +44,11 @@ export default function Home() {
       />
 
       <Header />
-
       <main>
         <Hero />
         <Experiences />
         <HowItWorks />
+        <SymbolsAtlas />   {/* ← خط جدید */}
         <Journal />
         <About />
       </main>
